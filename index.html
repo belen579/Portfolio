@@ -916,38 +916,44 @@ html[lang="en"] .lang-es {
                 </div>
             </div>
             
-            <form class="contact-form animate delay-1">
+            <form id="contactForm" class="contact-form animate delay-1">
                 <div class="form-group">
                     <label for="name" class="lang-es">Nombre</label>
                     <label for="name" class="lang-en">Name</label>
-                    <input type="text" id="name" class="form-control lang-es" placeholder="Tu nombre" class="lang-es">
-                    <input type="text" id="name-en" class="form-control lang-en" placeholder="Your name">
+                    <input type="text" id="name" name="name" class="form-control lang-es" placeholder="Tu nombre">
+                    <input type="text" id="name-en" name="name" class="form-control lang-en" placeholder="Your name">
                 </div>
                 
                 <div class="form-group">
                     <label for="email" class="lang-es">Email</label>
                     <label for="email" class="lang-en">Email</label>
-                    <input type="email" id="email" class="form-control lang-es" placeholder="Tu correo electrónico">
-                    <input type="email" id="email-en" class="form-control lang-en" placeholder="Your email">
+                    <input type="email" id="email" name="email" class="form-control lang-es" placeholder="Tu correo electrónico">
+                    <input type="email" id="email-en" name="email" class="form-control lang-en" placeholder="Your email">
                 </div>
                 
                 <div class="form-group">
                     <label for="subject" class="lang-es">Asunto</label>
                     <label for="subject" class="lang-en">Subject</label>
-                    <input type="text" id="subject" class="form-control lang-es" placeholder="Asunto del mensaje">
-                    <input type="text" id="subject-en" class="form-control lang-en" placeholder="Message subject">
+                    <input type="text" id="subject" name="subject" class="form-control lang-es" placeholder="Asunto del mensaje">
+                    <input type="text" id="subject-en" name="subject" class="form-control lang-en" placeholder="Message subject">
                 </div>
                 
                 <div class="form-group">
                     <label for="message" class="lang-es">Mensaje</label>
                     <label for="message" class="lang-en">Message</label>
-                    <textarea id="message" class="form-control lang-es" placeholder="Tu mensaje"></textarea>
-                    <textarea id="message-en" class="form-control lang-en" placeholder="Your message"></textarea>
+                    <textarea id="message" name="message" class="form-control lang-es" placeholder="Tu mensaje"></textarea>
+                    <textarea id="message-en" name="message" class="form-control lang-en" placeholder="Your message"></textarea>
                 </div>
                 
                 <button type="submit" class="btn btn-primary lang-es">Enviar Mensaje</button>
                 <button type="submit" class="btn btn-primary lang-en">Send Message</button>
             </form>
+            
+            <div id="successMessage" style="display: none; text-align: center; margin-top: 2rem; padding: 1rem; background-color: #d4edda; color: #155724; border-radius: 5px;">
+                <p class="lang-es"><strong>¡Mensaje enviado correctamente!</strong> Gracias por contactarme, te responderé lo antes posible.</p>
+                <p class="lang-en"><strong>Message sent successfully!</strong> Thank you for contacting me, I'll get back to you as soon as possible.</p>
+            </div>
+            
         </div>
     </section>
     
@@ -981,6 +987,42 @@ html[lang="en"] .lang-es {
     </footer>
     
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevenir el envío normal del formulario
+            
+            // Obtener el idioma actual
+            const currentLang = document.documentElement.lang;
+            
+            // Recoger los datos del formulario según el idioma
+            const name = currentLang === 'es' ? document.getElementById('name').value : document.getElementById('name-en').value;
+            const email = currentLang === 'es' ? document.getElementById('email').value : document.getElementById('email-en').value;
+            const subject = currentLang === 'es' ? document.getElementById('subject').value : document.getElementById('subject-en').value;
+            const message = currentLang === 'es' ? document.getElementById('message').value : document.getElementById('message-en').value;
+            
+            // Simulación de envío (reemplaza esto con tu código real de envío)
+            console.log('Enviando mensaje:', { name, email, subject, message });
+            
+            // Mostrar mensaje de éxito
+            successMessage.style.display = 'block';
+            
+            // Desplazarse hasta el mensaje
+            successMessage.scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Limpiar el formulario
+            form.reset();
+            
+            // Opcional: Ocultar el mensaje después de unos segundos
+            setTimeout(function() {
+                successMessage.style.display = 'none';
+            }, 5000); // 5 segundos
+        });
+    });
         // Navegación fija y efecto al hacer scroll
         const navbar = document.querySelector('.navbar');
         window.addEventListener('scroll', () => {
@@ -1073,6 +1115,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Comprobar en carga y scroll
         window.addEventListener('load', checkIfInView);
         window.addEventListener('scroll', checkIfInView);
+
+
     </script>
 </body>
 </html>
