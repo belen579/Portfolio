@@ -1,0 +1,27 @@
+# Videos
+*.mp4
+*.mov
+*.avi
+*.webm
+
+# Imágenes grandes (descomenta si necesitas excluir todas las imágenes)
+# *.jpg
+# *.jpeg
+# *.png
+# *.gif
+
+# Específicamente excluir ciertos archivos grandes
+images/Grupify.mp4
+images/Piensosbastos.mp4
+images/*
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de entorno
+.env
+.env.local
+
+# Carpetas node_modules (si usas npm)
+node_modules/
